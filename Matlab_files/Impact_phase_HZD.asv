@@ -88,7 +88,7 @@ ke_T= (MT/2)*((pT_xd)'*(pT_xd)+ (pT_yd)'*(pT_yd))+(IT/2)*(th_Td'*th_Td);
 
 K= ke_t1+ke_t2+ke_T+ke_f1+ke_f2;
 
-D = jacobian(jacobian(K,qd),qd)
+D = jacobian(jacobian(K,qd),qd);
 
 %gamma 2 - end points of the impact leg just before impact
 
@@ -97,7 +97,7 @@ p2_y=q7+lt*sin(q2+q4+q1-(pi/2))+lf*sin(q2+q1-(pi/2))-lf*sin(q3+q1-(pi/2))-lt*cos
 
 p2=[p2_x;p2_y];
 
-E2=jacobian(p2,q)
+E2=jacobian(p2,q);
 
 
 
