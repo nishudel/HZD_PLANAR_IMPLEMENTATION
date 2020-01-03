@@ -123,9 +123,9 @@ B=[eye(4,4);zeros(1,4)]
 
 
 list_q_e  = {'q1','q(1)'; 'q2','q(2)'; 'q3','q(3)'; 'q4','q(4)';'q5','q(5)'; 'dq1','q(6)';'dq2','q(7)';'dq3','q(8)';'dq4','q(9)';'dq5','q(10)'};
-write_func('D_q_m.m',{'q'},[list_q_e],{D,'D'});
-write_func('C_q_m.m',{'q','dq'},[list_q_e],{C,'C'});
-write_func('G_q_m.m',{'q'},[list_q_e],{G,'G'});
+write_func('D_q_s.m',{'q'},[list_q_e],{D,'D'});
+write_func('C_q_s.m',{'q','dq'},[list_q_e],{C,'C'});
+write_func('G_q_s.m',{'q'},[list_q_e],{G,'G'});
 
 
     

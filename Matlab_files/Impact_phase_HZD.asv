@@ -2,7 +2,7 @@ clear
 clc
 
 %Use one absolute and four relative coordinates and their derivatives
-syms q1 q2 q3 q4 q5 q6 q7 dq1 dq2 dq3 dq4 dq5 dq6 dq7 real
+syms q1 q2 q3 q4 q5 q6 q7 q1d q2d q3d q4d q5d q6d q7d real
 
 %Masses and inertia about com of the links
 syms MT Mf Mt IT If It real
@@ -47,20 +47,20 @@ pt_y2=q7+lt*sin(q2+q4+q1-(pi/2))+lf*sin(q2+q1-(pi/2))-lf*sin(q3+q1-(pi/2))+Pt*co
 
 %velocity calculaiton
 
-pt_x1d=jacobian(pt_x1,qe)*qed;
-pt_y1d=jacobian(pt_y1,qe)*qed;
+pt_x1d=jacobian(pt_x1,q)*qd;
+pt_y1d=jacobian(pt_y1,q)*qd;
 
-pf_x1d=jacobian(pf_x1,qe)*qed;
-pf_y1d=jacobian(pf_y1,qe)*qed;
+pf_x1d=jacobian(pf_x1,q)*qd;
+pf_y1d=jacobian(pf_y1,q)*qd;
 
-pT_xd=jacobian(pT_x,qe)*qed;
-pT_yd=jacobian(pT_y,qe)*qed;
+pT_xd=jacobian(pT_x,q)*qd;
+pT_yd=jacobian(pT_y,q)*qd;
 
-pt_x2d=jacobian(pt_x2,qe)*qed;
-pt_y2d=jacobian(pt_y2,qe)*qed;
+pt_x2d=jacobian(pt_x2,q)*qd;
+pt_y2d=jacobian(pt_y2,q)*qd;
 
-pf_x2d=jacobian(pf_x2,qe)*qed;
-pf_y2d=jacobian(pf_y2,qe)*qed;
+pf_x2d=jacobian(pf_x2,q)*qd;
+pf_y2d=jacobian(pf_y2,q)*qd;
 
 %theta abs
 th_T=q1;
@@ -70,15 +70,15 @@ th_f2=q1+q3;
 th_t2=q1+q3+q5;
 
 %omega abs
-th_Td=jacobian(th_T,qe)*qed;
-th_f1d=jacobian(th_f1,qe)*qed;
-th_f2d=jacobian(th_f2,qe)*qed;
-th_t1d=jacobian(th_t1,qe)*qed;
-th_t2d=jacobian(th_t2,qe)*qed;
+th_Td=jacobian(th_T,q)*qd;
+th_f1d=jacobian(th_f1,q)*qd;
+th_f2d=jacobian(th_f2,q)*qd;
+th_t1d=jacobian(th_t1,q)*qd;
+th_t2d=jacobian(th_t2,q)*qd;
 
 %potential energy calculation
 
-V= (MT*pT_y + Mf*(pf_y1+pf_y2) + Mt*(pt_y1+pt_y2))*g;
+V= (MT*pT_y + Mf*(pf_y1+pf_y2) + Mt*(pt_y1+p_y))*g;
 
 %kinetic energy calculation 
 
@@ -90,7 +90,7 @@ ke_T= (MT/2)*((pT_xd)'*(pT_xd)+ (pT_yd)'*(pT_yd))+(IT/2)*(th_Td'*th_Td);
 
 K= ke_t1+ke_t2+ke_T+ke_f1+ke_f2;
 
-De = jacobian(jacobian(K,qed),qed);
+De = jacobian(jacobian(K,qd),qd;
 De=simplify(De);
 
 %gamma 2 - end points of the impact leg just before impact
@@ -100,13 +100,13 @@ p2_y=q7+lt*sin(q2+q4+q1-(pi/2))+lf*sin(q2+q1-(pi/2))-lf*sin(q3+q1-(pi/2))-lt*cos
 
 p2=[p2_x;p2_y];
 
-E2=jacobian(p2,qe);
+E2=jacobian(p2,q);
 
 
 list_q_e  = {'q1','q(1)'; 'q2','q(2)'; 'q3','q(3)'; 'q4','q(4)';'q5','q(5)'; 'q6','q(6)';'q7','q(7)';'dq1','q(8)';'dq2','q(9)';'dq3','q(10)';'dq4','q(11)';'dq5','q(12)';'dq6','q(13)';'dq7','q(14)'};
 write_func('D_q_e.m',{'q'},[list_q_e],{De,'De'});
-write_func('E2_q_e.m',{'q'},[list_q_e],{E2,'E2'});
-
+write_func('E2_q_e.m',{'q','dq'},[list_q_e],{C,'C'});
+write_func('G_q_s.m',{'q'},[list_q_e],{G,'G'});
 
 
 
