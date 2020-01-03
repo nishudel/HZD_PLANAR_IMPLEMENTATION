@@ -21,26 +21,27 @@ qd = [q1d;q2d;q3d;q4d;q5d;q6d;q7d];
 
 %pcm of each link
 %t_stance
-pt_x1= q6-Pt*cos(q2+q4+q1-(pi/2));
+pt_x1= q6-(lt-Pt)*cos(q2+q4+q1-(pi/2));
 %pt_x1= -Pt*sin(q2+q4+q1);
-pt_y1= q7+ Pt*sin(q2+q4+q1-(pi/2));
+pt_y1= q7+ (lt-Pt)*sin(q2+q4+q1-(pi/2));
 %pt_y1=  -Pt*cos(q2+q4+q1);
 
 %f_stance
-pf_x1= q6-lt*cos(q2+q4+q1-(pi/2))-Pf*cos(q2+q1-(pi/2));
-pf_y1= q7+ lt*sin(q2+q4+q1-(pi/2))+Pf*sin(q2+q1-(pi/2));
+pf_x1= q6-lt*cos(q2+q4+q1-(pi/2))-(lf-Pf)*cos(q2+q1-(pi/2));
+pf_y1= q7+lt*sin(q2+q4+q1-(pi/2))+(lf-Pf)*sin(q2+q1-(pi/2));
 
 %Torso
-pT_x =q6-lt*cos(q2+q4+q1-(pi/2))-lf*cos(q2+q1-(pi/2))+PT*cos(q1);
-pT_y =q7+ lt*sin(q2+q4+q1-(pi/2))+lf*sin(q2+q1-(pi/2))+PT*sin(q1);
+pT_x =q6-lt*cos(q2+q4+q1-(pi/2))-lf*cos(q2+q1-(pi/2))+PT*sin(q1);
+pT_y =q7+lt*sin(q2+q4+q1-(pi/2))+lf*sin(q2+q1-(pi/2))+PT*cos(q1);
 
 %f_swing
 pf_x2=q6-lt*cos(q2+q4+q1-(pi/2))-lf*cos(q2+q1-(pi/2))+Pf*cos(q3+q1-(pi/2));
 pf_y2=q7+lt*sin(q2+q4+q1-(pi/2))+lf*sin(q2+q1-(pi/2))-Pf*sin(q3+q1-(pi/2));
 
 %t_swing
-pt_x2=q6-lt*cos(q2+q4+q1-(pi/2))-lf*cos(q2+q1-(pi/2))+lf*cos(q3+q1-(pi/2))-Pt*sin(q5+q3+q1);
-p_y=q7+lt*sin(q2+q4+q1-(pi/2))+lf*sin(q2+q1-(pi/2))-lf*sin(q3+q1-(pi/2))-Pt*cos(q5+q3+q1);
+pt_x2=q6-lt*cos(q2+q4+q1-(pi/2))-lf*cos(q2+q1-(pi/2))+lf*cos(q3+q1-(pi/2))+Pt*sin(q5+q3+q1);
+pt_y2=q7+lt*sin(q2+q4+q1-(pi/2))+lf*sin(q2+q1-(pi/2))-lf*sin(q3+q1-(pi/2))+Pt*cos(q5+q3+q1);
+
 
 
 %velocity calculaiton
