@@ -2,7 +2,7 @@ clear
 clc
 
 %Use one absolute and four relative coordinates and their derivatives
-syms q1 q2 q3 q4 q5 q1d q2d q3d q4d q5d real
+syms q1 q2 q3 q4 q5 dq1 dq2 dq3 dq4 dq5 real
 
 %Masses and inertia about com of the links
 syms MT Mf Mt IT If It real
@@ -25,10 +25,10 @@ Pt=0.128;
 %general parameters
 syms g real
 
-g=9.81;
+g=9.8;
 
 q = [q1;q2;q3;q4;q5];
-qd= [q1d;q2d;q3d;q4d;q5d];
+qd= [dq1;dq2;dq3;dq4;dq5];
 
 
 
@@ -89,7 +89,7 @@ th_t2d=jacobian(th_t2,q)*qd;
 %potential energy calculation
 
 V= (MT*pT_y + Mf*(pf_y1+pf_y2) + Mt*(pt_y1+pt_y2))*g;
-
+V = simplify(V);
 %kinetic energy calculation 
 
 ke_t1= (Mt/2)*((pt_x1d)'*(pt_x1d)+ (pt_y1d)'*(pt_y1d))+(It/2)*(th_t1d'*th_t1d);
@@ -104,7 +104,7 @@ K=simplify(K)
 D = jacobian(jacobian(K,qd),qd);
 D=simplify(D);
 G= jacobian(V,q);
-G=simplify(G);
+G=simplify(G');
 for k=1:5
 	for j=1:5
 		C(k,j)=sym(0)*g;
@@ -118,11 +118,11 @@ end
 
 C=simplify(C);
 
-
+B=[eye(4,4);zeros(1,4)]
 %write the results
 
 
-list_q_e  = {'q1','q(1)'; 'q2','q(2)'; 'q3','q(3)'; 'q4','q(4)';'q5','q(5)'; 'qd1','q(6)';'qd2','q(7)';'qd3','q(8)';'qd4','q(9)';'qd5','q(10)'};
+list_q_e  = {'q1','q(1)'; 'q2','q(2)'; 'q3','q(3)'; 'q4','q(4)';'q5','q(5)'; 'dq1','q(6)';'dq2','q(7)';'dq3','q(8)';'dq4','q(9)';'dq5','q(10)'};
 write_func('D_q_m.m',{'q'},[list_q_e],{D,'D'});
 write_func('C_q_m.m',{'q','dq'},[list_q_e],{C,'C'});
 write_func('G_q_m.m',{'q'},[list_q_e],{G,'G'});
