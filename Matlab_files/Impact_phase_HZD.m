@@ -10,9 +10,23 @@ syms MT Mf Mt IT If It real
 %Length parameters
 syms lT lf lt PT Pf Pt real
 
+MT=20;
+Mf=6.8;
+Mt=3.2;
+lT=0.625;
+lf=0.4;
+lt=0.4;
+IT=2.22;
+If=1.08;
+It=0.93;
+PT=0.2;
+Pf=0.163;
+Pt=0.128;
+
 %general parameters
 syms g real
 
+g=9.8;
 
 qs = [q1;q2;q3;q4;q5];
 qsd= [dq1;dq2;dq3;dq4;dq5];
